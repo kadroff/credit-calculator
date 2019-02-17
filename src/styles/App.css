@@ -18,26 +18,57 @@ small {
 
 .App {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: left;
   padding: 2rem;
   border-radius: 0.5rem;
-  width: 12rem;
-  margin: 10vh auto;
   box-shadow: 15px 20px 70px -10px;
 }
 
-.input-range__label--max {
+.left-slider {
+  justify-content: flex-start;
+  width: 50%;
+  flex: 1 0 0;
+  order: 1;
+}
+
+.right-slider {
+  justify-content: flex-end;
+  width: 50%;
+  flex: 1 0 0;
+  order: 2;
+  padding-left: 4rem;
+}
+
+.input-range .input-range__track--active {
+  background: none;
+}
+
+.input-range .input-range__track {
+  height: 0.5rem;
+}
+
+.input-range .input-range__label--value {
   display: none;
 }
 
+.input-range .input-range__slider {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-top: -1rem;
+  border: 1px solid #3498db;
+  background-color: #3498db;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.input-range__label--max {
+}
+
 .input-range__label--min {
-  display: none;
 }
 
 .input-range__label-container {
   left: -50%;
   position: relative;
-  display: none;
 }
