@@ -41,6 +41,11 @@ small {
   padding-left: 4rem;
 }
 
+.input-range {
+  padding: 0.3rem;
+  padding-top: 3.5rem;
+}
+
 .input-range .input-range__track--active {
   background: none;
 }
@@ -53,6 +58,36 @@ small {
   display: none;
 }
 
+form {
+  font-size: 22px;
+  color: #000;
+  padding-top: 15px;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+}
+
+label {
+  width: 50%;
+}
+
+input[type="text"] {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 60px;
+  border: 0;
+  width: 40%;
+  max-width: 100%;
+  color: #222;
+  background: rgb(255, 234, 196);
+  text-align: right;
+  border-radius: 5px;
+  padding: 0px 10px;
+}
+
 .input-range .input-range__slider {
   width: 1.6rem;
   height: 1.6rem;
@@ -62,13 +97,9 @@ small {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
-.input-range__label--max {
-}
-
-.input-range__label--min {
-}
-
 .input-range__label-container {
   left: -50%;
   position: relative;
+  color: #7f8c8d;
+  font-size: 14px;
 }

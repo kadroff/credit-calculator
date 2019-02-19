@@ -64,7 +64,10 @@ class Calculator extends Component {
     return (
       <div className="App">
         <div className="left-slider">
-          <h4>Сумма займа: {amountValue}₽</h4>
+          <form>
+            <label>Сумма займа:</label>
+            <input type="text" value={amountValue} name="name" />
+          </form>
           <InputRange
             step={amountStep}
             maxValue={5000000}
@@ -72,7 +75,11 @@ class Calculator extends Component {
             value={amountValue}
             onChange={this.handleAmountChange}
           />
-          <h4>Срок займа: {yearsValue}м</h4>
+          {/* <h5>Срок займа: {yearsValue}м</h5> */}
+          <form>
+            <label>Сумма займа:</label>
+            <input type="text" value={yearsValue} name="name" />
+          </form>
           <InputRange
             step={1}
             maxValue={240}
@@ -81,7 +88,11 @@ class Calculator extends Component {
             onChange={this.handleYearChange}
             className="input_range"
           />
-          <h4>Ставка{rateValue}%</h4>
+          {/* <h5>Ставка{rateValue}%</h5> */}
+          <form>
+            <label>Сумма займа:</label>
+            <input type="text" value={rateValue} name="name" />
+          </form>
           <InputRange
             step={0.5}
             maxValue={60}
@@ -92,11 +103,15 @@ class Calculator extends Component {
           />
         </div>
         <div className="right-slider">
-          <h4>Выплата {this.payment()}₽</h4>
+          {/* <h5>Выплата {this.payment()}₽</h5> */}
+          <form>
+            <label>Сумма займа:</label>
+            <input type="text" value={this.payment()} name="name" />
+          </form>
           <InputRange
             step={1000}
             maxValue={200000}
-            minValue={15}
+            minValue={0}
             value={this.payment()}
             onChange={this.handelPaymentChange}
             className="input_range"
