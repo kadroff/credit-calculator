@@ -58,7 +58,7 @@ small {
   display: none;
 }
 
-form {
+.form-left {
   font-size: 22px;
   color: #000;
   padding-top: 15px;
@@ -70,11 +70,11 @@ form {
   width: 100%;
 }
 
-label {
+.label-left {
   width: 50%;
 }
 
-input[type="text"] {
+.input-left {
   font-weight: 600;
   font-size: 30px;
   line-height: 60px;
@@ -102,4 +102,18 @@ input[type="text"] {
   position: relative;
   color: #7f8c8d;
   font-size: 14px;
+}
+
+input[type="button"] {
+  margin-top: 1.5rem;
+  height: 3rem;
+  cursor: pointer;
+  border: none;
+  background: #ffffff;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1.5rem;
+  color: #ffffff;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  background-color: #5b94d9;
 }
