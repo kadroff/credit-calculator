@@ -14,7 +14,8 @@ class Calculator extends Component {
       payment: 0,
       amountStep: 1000,
       rateStep: 0.5,
-      paymentStep: 0
+      paymentStep: 0,
+      yearsStep: 12
     };
   }
 
@@ -30,6 +31,15 @@ class Calculator extends Component {
   };
   handleYearChange = value => {
     this.setState({ yearsValue: value });
+    let yearsStep = 0;
+    if (value < 12) {
+      yearsStep = 1;
+    } else if (value <= 18) {
+      yearsStep = 6;
+    } else if (value >= 24) {
+      yearsStep = 12;
+    }
+    this.setState({ yearsStep: yearsStep });
   };
   handleRateChange = value => {
     this.setState({ rateValue: value });
@@ -59,7 +69,13 @@ class Calculator extends Component {
   };
 
   render() {
-    let { amountValue, yearsValue, rateValue, amountStep } = this.state;
+    let {
+      amountValue,
+      yearsValue,
+      rateValue,
+      amountStep,
+      yearsStep
+    } = this.state;
 
     return (
       <div className="App">
@@ -69,29 +85,29 @@ class Calculator extends Component {
             <input
               type="text"
               className="input-left"
-              value={amountValue}
+              value={amountValue + " ₽"}
               name="name"
             />
           </form>
           <InputRange
             step={amountStep}
             maxValue={5000000}
-            minValue={100000}
+            minValue={0}
             value={amountValue}
             onChange={this.handleAmountChange}
           />
           {/* <h5>Срок займа: {yearsValue}м</h5> */}
           <form className="form-left">
-            <label className="label-left">Сумма займа:</label>
+            <label className="label-left">Срок займа:</label>
             <input
               type="text"
               className="input-left"
-              value={yearsValue}
+              value={yearsValue + " м."}
               name="name"
             />
           </form>
           <InputRange
-            step={1}
+            step={yearsStep}
             maxValue={240}
             minValue={1}
             value={yearsValue}
@@ -100,11 +116,11 @@ class Calculator extends Component {
           />
           {/* <h5>Ставка{rateValue}%</h5> */}
           <form className="form-left">
-            <label className="label-left">Сумма займа:</label>
+            <label className="label-left">Процентная ставка:</label>
             <input
               type="text"
               className="input-left"
-              value={rateValue}
+              value={rateValue + "%"}
               name="name"
             />
           </form>
@@ -119,11 +135,11 @@ class Calculator extends Component {
         </div>
         <div className="right-slider">
           <form className="form-left">
-            <label className="label-left">Сумма займа:</label>
+            <label className="label-left">Ежемесячный платеж:</label>
             <input
               type="text"
               className="input-left"
-              value={this.payment()}
+              value={this.payment() + " ₽"}
               name="name"
             />
           </form>
@@ -137,12 +153,22 @@ class Calculator extends Component {
           />
           <form className="form-left">
             <label className="label-left">Сумма к выплате:</label>
-            <input type="text" className="input-left" value={2} name="name" />
+            <input
+              type="text"
+              className="input-left"
+              value={2 + " ₽"}
+              name="name"
+            />
           </form>
 
           <form className="form-left">
             <label className="label-left">Переплата процентов:</label>
-            <input type="text" className="input-left" value={2} name="name" />
+            <input
+              type="text"
+              className="input-left"
+              value={2 + " ₽"}
+              name="name"
+            />
           </form>
 
           <input type="button" value="График платежей" />

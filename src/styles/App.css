@@ -100,6 +100,7 @@ small {
 .input-range__label-container {
   left: -50%;
   position: relative;
+  top: -20px;
   color: #7f8c8d;
   font-size: 14px;
 }
