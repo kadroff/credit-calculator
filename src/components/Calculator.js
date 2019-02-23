@@ -11,7 +11,7 @@ class Calculator extends Component {
       amountValue: 500000,
       yearsValue: 36,
       rateValue: 15,
-      payment: 0,
+      payment: 17333,
       amountStep: 1000,
       rateStep: 0.1,
       paymentStep: 0,
@@ -28,6 +28,7 @@ class Calculator extends Component {
       resultStep = 50000;
     } else resultStep = 100000;
     this.setState({ amountStep: resultStep });
+    document.getElementById("amount").value = this.state.amountValue;
   };
   handleYearChange = value => {
     this.setState({ yearsValue: value });
@@ -40,9 +41,11 @@ class Calculator extends Component {
       yearsStep = 12;
     }
     this.setState({ yearsStep: yearsStep });
+    document.getElementById("years").value = this.state.yearsValue;
   };
   handleRateChange = value => {
     this.setState({ rateValue: value, rateStep: 0.5 });
+    document.getElementById("rate").value = this.state.rateValue;
   };
   handelPaymentChange = value => {
     let { yearsValue, rateValue } = this.state;
@@ -57,15 +60,41 @@ class Calculator extends Component {
       paymentStep = 3327;
     } else paymentStep = 1000;
     this.setState({ amountValue: summa, paymentStep: paymentStep });
+    document.getElementById("amount").value = summa;
+    this.payment();
   };
 
   payment = () => {
-    let { amountValue, yearsValue, rateValue } = this.state;
+    let { amountValue, yearsValue, rateValue, payment } = this.state;
     rateValue /= 1200;
-    const payment = Math.round(
+    const paymentValue = Math.round(
       (amountValue * rateValue) / (1 - Math.pow(1 + rateValue, -yearsValue))
     );
-    return payment;
+    if (payment !== paymentValue) {
+      this.setState({ payment: paymentValue });
+      document.getElementById("payment").value = paymentValue;
+    }
+    return paymentValue;
+  };
+
+  inputAmountChange = () => {
+    let amountValue = document.getElementById("amount").value;
+    this.setState({ amountValue: amountValue });
+  };
+
+  inputYearsChange = () => {
+    let yearsValue = document.getElementById("years").value;
+    this.setState({ yearsValue: yearsValue });
+  };
+
+  inputRateChange = () => {
+    let rateValue = document.getElementById("rate").value;
+    this.setState({ rateValue: rateValue });
+  };
+
+  inputPaymentChange = () => {
+    let paymentValue = document.getElementById("payment").value;
+    this.setState({ payment: paymentValue });
   };
 
   render() {
@@ -77,7 +106,6 @@ class Calculator extends Component {
       yearsStep,
       rateStep
     } = this.state;
-
     return (
       <div className="App">
         <div className="left-slider">
@@ -85,9 +113,11 @@ class Calculator extends Component {
             <label className="label-left">Сумма займа:</label>
             <input
               type="text"
+              id="amount"
               className="input-left"
-              value={amountValue + " ₽"}
+              defaultValue="500000"
               name="name"
+              onChange={this.inputAmountChange}
             />
           </form>
           <InputRange
@@ -101,9 +131,11 @@ class Calculator extends Component {
             <label className="label-left">Срок займа:</label>
             <input
               type="text"
+              id="years"
               className="input-left"
-              value={yearsValue + " м."}
+              defaultValue="36"
               name="name"
+              onChange={this.inputYearsChange}
             />
           </form>
           <InputRange
@@ -118,9 +150,11 @@ class Calculator extends Component {
             <label className="label-left">Процентная ставка:</label>
             <input
               type="text"
+              id="rate"
               className="input-left"
-              value={rateValue + " %"}
+              defaultValue="15"
               name="name"
+              onChange={this.inputRateChange}
             />
           </form>
           <InputRange
@@ -134,8 +168,8 @@ class Calculator extends Component {
           <div className="form-left">
             <p className="type-payment">Вид платежа:</p>
             <select className="select-payment">
-              <option>Аннуитентный</option>
-              <option>Только проценты</option>
+              <option>аннуитентный</option>
+              <option>только проценты</option>
             </select>
           </div>
         </div>
@@ -145,8 +179,10 @@ class Calculator extends Component {
             <input
               type="text"
               className="input-left"
-              value={this.payment() + " ₽"}
+              id="payment"
               name="name"
+              defaultValue="17333"
+              onChange={this.inputPaymentChange}
             />
           </form>
           <InputRange
