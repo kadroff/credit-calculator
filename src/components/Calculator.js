@@ -13,7 +13,7 @@ class Calculator extends Component {
       rateValue: 15,
       payment: 0,
       amountStep: 1000,
-      rateStep: 0.5,
+      rateStep: 0.1,
       paymentStep: 0,
       yearsStep: 12
     };
@@ -42,7 +42,7 @@ class Calculator extends Component {
     this.setState({ yearsStep: yearsStep });
   };
   handleRateChange = value => {
-    this.setState({ rateValue: value });
+    this.setState({ rateValue: value, rateStep: 0.5 });
   };
   handelPaymentChange = value => {
     let { yearsValue, rateValue } = this.state;
@@ -74,7 +74,8 @@ class Calculator extends Component {
       yearsValue,
       rateValue,
       amountStep,
-      yearsStep
+      yearsStep,
+      rateStep
     } = this.state;
 
     return (
@@ -96,7 +97,6 @@ class Calculator extends Component {
             value={amountValue}
             onChange={this.handleAmountChange}
           />
-          {/* <h5>Срок займа: {yearsValue}м</h5> */}
           <form className="form-left">
             <label className="label-left">Срок займа:</label>
             <input
@@ -114,24 +114,30 @@ class Calculator extends Component {
             onChange={this.handleYearChange}
             className="input_range"
           />
-          {/* <h5>Ставка{rateValue}%</h5> */}
           <form className="form-left">
             <label className="label-left">Процентная ставка:</label>
             <input
               type="text"
               className="input-left"
-              value={rateValue + "%"}
+              value={rateValue + " %"}
               name="name"
             />
           </form>
           <InputRange
-            step={0.5}
+            step={rateStep}
             maxValue={60}
             minValue={15}
             value={rateValue}
             onChange={this.handleRateChange}
             className="input_range"
           />
+          <div className="form-left">
+            <p className="type-payment">Вид платежа:</p>
+            <select className="select-payment">
+              <option>Аннуитентный</option>
+              <option>Только проценты</option>
+            </select>
+          </div>
         </div>
         <div className="right-slider">
           <form className="form-left">
@@ -174,8 +180,6 @@ class Calculator extends Component {
           <input type="button" value="График платежей" />
           <input type="button" value="Оставить заявку" />
         </div>
-
-        {/* <Display years={yearsValue} amount={amountValue} /> */}
       </div>
     );
   }
