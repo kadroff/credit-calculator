@@ -12,20 +12,25 @@ class Calculator extends Component {
       years: 36,
       rate: 15,
       payment: 17333,
-      totalSum: 0,
+      totalSum: 500000,
       totalPercents: 0
     };
   }
 
   handleRangeChange(name, value) {
     this.setState({ [name]: value });
+    this.calculate();
   }
 
   handleInputChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    this.calculate();
   }
 
-  calculate() {}
+  calculate() {
+    const payment = Math.floor(this.state.amount / this.state.years);
+    this.setState({ payment: payment, totalSum: this.state.amount });
+  }
 
   render() {
     return (
@@ -37,6 +42,7 @@ class Calculator extends Component {
               type='number'
               className='input-left'
               value={this.state.amount}
+              lang='en-150'
               name='amount'
               onChange={e => this.handleInputChange(e)}
             />
@@ -116,6 +122,7 @@ class Calculator extends Component {
             <input
               type='text'
               className='input-left'
+              readOnly
               value={this.state.totalSum.toLocaleString()}
               name='totalSum'
             />
@@ -126,6 +133,7 @@ class Calculator extends Component {
             <input
               type='text'
               className='input-left'
+              readOnly
               value={this.state.totalPercents.toLocaleString()}
               name='totalPercents'
             />
