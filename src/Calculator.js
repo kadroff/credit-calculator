@@ -107,7 +107,7 @@ class Calculator extends Component {
       rateStep
     } = this.state;
     return (
-      <div className='App'>
+      <div className='calculator'>
         <div className='left-slider'>
           <form className='form-left'>
             <label className='label-left'>Сумма займа:</label>

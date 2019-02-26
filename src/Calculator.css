@@ -1,22 +1,6 @@
-html {
+.calculator {
   font-size: 17px;
-}
-
-body {
-  font-family: "Nunito", sans-serif;
-}
-
-p {
-  font-size: 2rem;
-  margin: 0;
-}
-
-small {
-  font-weight: lighter;
-  color: gray;
-}
-
-.App {
+  font-family: 'Nunito', sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -27,14 +11,24 @@ small {
   flex-wrap: wrap;
 }
 
-.left-slider {
+.calculator p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.calculator small {
+  font-weight: lighter;
+  color: gray;
+}
+
+.calculator .left-slider {
   justify-content: flex-start;
   width: 50%;
   flex: 1 0 0;
   order: 1;
 }
 
-.right-slider {
+.calculator .right-slider {
   justify-content: flex-end;
   width: 50%;
   flex: 1 0 0;
@@ -43,7 +37,7 @@ small {
 }
 
 @media (max-width: 600px) {
-  .right-slider {
+  .calculator .right-slider {
     justify-content: flex-end;
     width: 50%;
     flex: 1 0 0;
@@ -53,24 +47,24 @@ small {
   }
 }
 
-.input-range {
+.calculator .input-range {
   padding: 0.3rem;
   padding-top: 3.5rem;
 }
 
-.input-range .input-range__track--active {
+.calculator .input-range .input-range__track--active {
   background: none;
 }
 
-.input-range .input-range__track {
+.calculator .input-range .input-range__track {
   height: 0.5rem;
 }
 
-.input-range .input-range__label--value {
+.calculator .input-range .input-range__label--value {
   display: none;
 }
 
-.form-left {
+.calculator .form-left {
   font-size: 22px;
   color: #000;
   padding-top: 15px;
@@ -82,11 +76,11 @@ small {
   width: 100%;
 }
 
-.label-left {
+.calculator .label-left {
   width: 50%;
 }
 
-.input-left {
+.calculator .input-left {
   font-weight: 600;
   font-size: 30px;
   line-height: 60px;
@@ -100,7 +94,7 @@ small {
   padding: 0px 10px;
 }
 
-.input-range .input-range__slider {
+.calculator .input-range .input-range__slider {
   width: 1.6rem;
   height: 1.6rem;
   margin-top: -1rem;
@@ -109,7 +103,7 @@ small {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
-.input-range__label-container {
+.calculator .input-range__label-container {
   left: -50%;
   position: relative;
   top: -20px;
@@ -117,7 +111,7 @@ small {
   font-size: 14px;
 }
 
-input[type="button"] {
+.calculator input[type='button'] {
   margin-top: 1.5rem;
   height: 3rem;
   cursor: pointer;
@@ -131,12 +125,12 @@ input[type="button"] {
   background-color: #5b94d9;
 }
 
-.type-payment {
+.calculator .type-payment {
   width: 50%;
   font-size: 22px;
 }
 
-.select-payment {
+.calculator .select-payment {
   font-weight: 600;
   font-size: 17px;
   line-height: 60px;
