@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import InputRange from "react-input-range";
+import React, { Component } from 'react';
+import InputRange from 'react-input-range';
 
-import "../styles/App.css";
-import "react-input-range/lib/css/index.css";
+import './Calculator.css';
+import 'react-input-range/lib/css/index.css';
 
 class Calculator extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Calculator extends Component {
       resultStep = 50000;
     } else resultStep = 100000;
     this.setState({ amountStep: resultStep });
-    document.getElementById("amount").value = this.state.amountValue;
+    document.getElementById('amount').value = this.state.amountValue;
   };
   handleYearChange = value => {
     this.setState({ yearsValue: value });
@@ -41,11 +41,11 @@ class Calculator extends Component {
       yearsStep = 12;
     }
     this.setState({ yearsStep: yearsStep });
-    document.getElementById("years").value = this.state.yearsValue;
+    document.getElementById('years').value = this.state.yearsValue;
   };
   handleRateChange = value => {
     this.setState({ rateValue: value, rateStep: 0.5 });
-    document.getElementById("rate").value = this.state.rateValue;
+    document.getElementById('rate').value = this.state.rateValue;
   };
   handelPaymentChange = value => {
     let { yearsValue, rateValue } = this.state;
@@ -60,7 +60,7 @@ class Calculator extends Component {
       paymentStep = 3327;
     } else paymentStep = 1000;
     this.setState({ amountValue: summa, paymentStep: paymentStep });
-    document.getElementById("amount").value = summa;
+    document.getElementById('amount').value = summa;
     this.payment();
   };
 
@@ -72,28 +72,28 @@ class Calculator extends Component {
     );
     if (payment !== paymentValue) {
       this.setState({ payment: paymentValue });
-      document.getElementById("payment").value = paymentValue;
+      document.getElementById('payment').value = paymentValue;
     }
     return paymentValue;
   };
 
   inputAmountChange = () => {
-    let amountValue = document.getElementById("amount").value;
+    let amountValue = document.getElementById('amount').value;
     this.setState({ amountValue: amountValue });
   };
 
   inputYearsChange = () => {
-    let yearsValue = document.getElementById("years").value;
+    let yearsValue = document.getElementById('years').value;
     this.setState({ yearsValue: yearsValue });
   };
 
   inputRateChange = () => {
-    let rateValue = document.getElementById("rate").value;
+    let rateValue = document.getElementById('rate').value;
     this.setState({ rateValue: rateValue });
   };
 
   inputPaymentChange = () => {
-    let paymentValue = document.getElementById("payment").value;
+    let paymentValue = document.getElementById('payment').value;
     this.setState({ payment: paymentValue });
   };
 
@@ -107,16 +107,16 @@ class Calculator extends Component {
       rateStep
     } = this.state;
     return (
-      <div className="App">
-        <div className="left-slider">
-          <form className="form-left">
-            <label className="label-left">Сумма займа:</label>
+      <div className='App'>
+        <div className='left-slider'>
+          <form className='form-left'>
+            <label className='label-left'>Сумма займа:</label>
             <input
-              type="text"
-              id="amount"
-              className="input-left"
-              defaultValue="500000"
-              name="name"
+              type='text'
+              id='amount'
+              className='input-left'
+              defaultValue='500000'
+              name='name'
               onChange={this.inputAmountChange}
             />
           </form>
@@ -127,14 +127,14 @@ class Calculator extends Component {
             value={amountValue}
             onChange={this.handleAmountChange}
           />
-          <form className="form-left">
-            <label className="label-left">Срок займа:</label>
+          <form className='form-left'>
+            <label className='label-left'>Срок займа:</label>
             <input
-              type="text"
-              id="years"
-              className="input-left"
-              defaultValue="36"
-              name="name"
+              type='text'
+              id='years'
+              className='input-left'
+              defaultValue='36'
+              name='name'
               onChange={this.inputYearsChange}
             />
           </form>
@@ -144,16 +144,16 @@ class Calculator extends Component {
             minValue={1}
             value={yearsValue}
             onChange={this.handleYearChange}
-            className="input_range"
+            className='input_range'
           />
-          <form className="form-left">
-            <label className="label-left">Процентная ставка:</label>
+          <form className='form-left'>
+            <label className='label-left'>Процентная ставка:</label>
             <input
-              type="text"
-              id="rate"
-              className="input-left"
-              defaultValue="15"
-              name="name"
+              type='text'
+              id='rate'
+              className='input-left'
+              defaultValue='15'
+              name='name'
               onChange={this.inputRateChange}
             />
           </form>
@@ -163,25 +163,25 @@ class Calculator extends Component {
             minValue={15}
             value={rateValue}
             onChange={this.handleRateChange}
-            className="input_range"
+            className='input_range'
           />
-          <div className="form-left">
-            <p className="type-payment">Вид платежа:</p>
-            <select className="select-payment">
+          <div className='form-left'>
+            <p className='type-payment'>Вид платежа:</p>
+            <select className='select-payment'>
               <option>аннуитентный</option>
               <option>только проценты</option>
             </select>
           </div>
         </div>
-        <div className="right-slider">
-          <form className="form-left">
-            <label className="label-left">Ежемесячный платеж:</label>
+        <div className='right-slider'>
+          <form className='form-left'>
+            <label className='label-left'>Ежемесячный платеж:</label>
             <input
-              type="text"
-              className="input-left"
-              id="payment"
-              name="name"
-              defaultValue="17333"
+              type='text'
+              className='input-left'
+              id='payment'
+              name='name'
+              defaultValue='17333'
               onChange={this.inputPaymentChange}
             />
           </form>
@@ -191,30 +191,30 @@ class Calculator extends Component {
             minValue={0}
             value={this.payment()}
             onChange={this.handelPaymentChange}
-            className="input_range"
+            className='input_range'
           />
-          <form className="form-left">
-            <label className="label-left">Сумма к выплате:</label>
+          <form className='form-left'>
+            <label className='label-left'>Сумма к выплате:</label>
             <input
-              type="text"
-              className="input-left"
-              value={2 + " ₽"}
-              name="name"
+              type='text'
+              className='input-left'
+              value={2 + ' ₽'}
+              name='name'
             />
           </form>
 
-          <form className="form-left">
-            <label className="label-left">Переплата процентов:</label>
+          <form className='form-left'>
+            <label className='label-left'>Переплата процентов:</label>
             <input
-              type="text"
-              className="input-left"
-              value={2 + " ₽"}
-              name="name"
+              type='text'
+              className='input-left'
+              value={2 + ' ₽'}
+              name='name'
             />
           </form>
 
-          <input type="button" value="График платежей" />
-          <input type="button" value="Оставить заявку" />
+          <input type='button' value='График платежей' />
+          <input type='button' value='Оставить заявку' />
         </div>
       </div>
     );
