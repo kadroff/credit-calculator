@@ -13,7 +13,8 @@ class Calculator extends Component {
       rate: 15,
       payment: 17333,
       totalSum: 500000,
-      totalPercents: 0
+      totalPercents: 0,
+      amountStep: 50000
     };
   }
 
@@ -21,6 +22,16 @@ class Calculator extends Component {
     name === "rate"
       ? this.setState({ [name]: value.toFixed(1) })
       : this.setState({ [name]: value });
+
+    if (name === "amount") {
+      let resultStep = 0;
+      if (value < 100000) {
+        resultStep = 10000;
+      } else if (value < 1000000) {
+        resultStep = 50000;
+      } else resultStep = 100000;
+      this.setState({ amountStep: resultStep });
+    }
     this.calculate();
   }
 
@@ -39,6 +50,7 @@ class Calculator extends Component {
   }
 
   render() {
+    const { amountStep } = this.state;
     return (
       <form className="calculator">
         <div className="left-slider">
@@ -54,7 +66,7 @@ class Calculator extends Component {
             />
           </div>
           <InputRange
-            step={1000}
+            step={amountStep}
             maxValue={5000000}
             minValue={0}
             value={this.state.amount}
