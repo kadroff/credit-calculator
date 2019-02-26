@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import InputRange from 'react-input-range';
+import React, { Component } from "react";
+import InputRange from "react-input-range";
 
-import './Calculator.css';
-import 'react-input-range/lib/css/index.css';
+import "./Calculator.css";
+import "react-input-range/lib/css/index.css";
 
 class Calculator extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ class Calculator extends Component {
   }
 
   handleRangeChange(name, value) {
-    this.setState({ [name]: value });
+    name === "rate"
+      ? this.setState({ [name]: value.toFixed(1) })
+      : this.setState({ [name]: value });
     this.calculate();
   }
 
@@ -28,22 +30,26 @@ class Calculator extends Component {
   }
 
   calculate() {
-    const payment = Math.floor(this.state.amount / this.state.years);
-    this.setState({ payment: payment, totalSum: this.state.amount });
+    let { amount, years, rate } = this.state;
+    rate = rate / 1200;
+    const paymentValue = Math.round(
+      (amount * rate) / (1 - Math.pow(1 + rate, -years))
+    );
+    this.setState({ payment: paymentValue, totalSum: this.state.amount });
   }
 
   render() {
     return (
-      <form className='calculator'>
-        <div className='left-slider'>
-          <div className='form-left'>
-            <label className='label-left'>Сумма займа:</label>
+      <form className="calculator">
+        <div className="left-slider">
+          <div className="form-left">
+            <label className="label-left">Сумма займа:</label>
             <input
-              type='number'
-              className='input-left'
+              type="number"
+              className="input-left"
               value={this.state.amount}
-              lang='en-150'
-              name='amount'
+              lang="en-150"
+              name="amount"
               onChange={e => this.handleInputChange(e)}
             />
           </div>
@@ -52,14 +58,14 @@ class Calculator extends Component {
             maxValue={5000000}
             minValue={0}
             value={this.state.amount}
-            onChange={value => this.handleRangeChange('amount', value)}
+            onChange={value => this.handleRangeChange("amount", value)}
           />
-          <div className='form-left'>
-            <label className='label-left'>Срок займа:</label>
+          <div className="form-left">
+            <label className="label-left">Срок займа:</label>
             <input
-              type='number'
-              className='input-left'
-              name='years'
+              type="number"
+              className="input-left"
+              name="years"
               value={this.state.years}
               onChange={e => this.handleInputChange(e)}
             />
@@ -69,15 +75,15 @@ class Calculator extends Component {
             maxValue={240}
             minValue={1}
             value={this.state.years}
-            onChange={value => this.handleRangeChange('years', value)}
-            className='input_range'
+            onChange={value => this.handleRangeChange("years", value)}
+            className="input_range"
           />
-          <div className='form-left'>
-            <label className='label-left'>Процентная ставка:</label>
+          <div className="form-left">
+            <label className="label-left">Процентная ставка:</label>
             <input
-              type='text'
-              className='input-left'
-              name='rate'
+              type="text"
+              className="input-left"
+              name="rate"
               value={this.state.rate}
               onChange={e => this.handleInputChange(e)}
             />
@@ -87,24 +93,24 @@ class Calculator extends Component {
             maxValue={60}
             minValue={15}
             value={this.state.rate}
-            onChange={value => this.handleRangeChange('rate', value)}
-            className='input_range'
+            onChange={value => this.handleRangeChange("rate", value)}
+            className="input_range"
           />
-          <div className='form-left'>
-            <p className='type-payment'>Вид платежа:</p>
-            <select className='select-payment'>
+          <div className="form-left">
+            <p className="type-payment">Вид платежа:</p>
+            <select className="select-payment">
               <option>аннуитентный</option>
               <option>только проценты</option>
             </select>
           </div>
         </div>
-        <div className='right-slider'>
-          <div className='form-left'>
-            <label className='label-left'>Ежемесячный платеж:</label>
+        <div className="right-slider">
+          <div className="form-left">
+            <label className="label-left">Ежемесячный платеж:</label>
             <input
-              type='text'
-              className='input-left'
-              name='name'
+              type="text"
+              className="input-left"
+              name="name"
               value={this.state.payment}
               onChange={e => this.handleRangeChange(e)}
             />
@@ -114,33 +120,33 @@ class Calculator extends Component {
             maxValue={200000}
             minValue={0}
             value={this.state.payment}
-            onChange={value => this.handleRangeChange('payment', value)}
-            className='input_range'
+            onChange={value => this.handleRangeChange("payment", value)}
+            className="input_range"
           />
-          <div className='form-left'>
-            <label className='label-left'>Сумма к выплате:</label>
+          <div className="form-left">
+            <label className="label-left">Сумма к выплате:</label>
             <input
-              type='text'
-              className='input-left'
+              type="text"
+              className="input-left"
               readOnly
               value={this.state.totalSum.toLocaleString()}
-              name='totalSum'
+              name="totalSum"
             />
           </div>
 
-          <div className='form-left'>
-            <label className='label-left'>Переплата процентов:</label>
+          <div className="form-left">
+            <label className="label-left">Переплата процентов:</label>
             <input
-              type='text'
-              className='input-left'
+              type="text"
+              className="input-left"
               readOnly
               value={this.state.totalPercents.toLocaleString()}
-              name='totalPercents'
+              name="totalPercents"
             />
           </div>
 
-          <input type='button' value='График платежей' />
-          <input type='button' value='Оставить заявку' />
+          <input type="button" value="График платежей" />
+          <input type="button" value="Оставить заявку" />
         </div>
       </form>
     );
