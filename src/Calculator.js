@@ -15,7 +15,9 @@ class Calculator extends Component {
       totalSum: 500000,
       totalPercents: 0,
       amountStep: 50000,
-      yearsStep: 12
+      yearsStep: 12,
+      amountPayment: 623976,
+      overpayment: 123976
     };
   }
 
@@ -53,15 +55,24 @@ class Calculator extends Component {
 
   calculate(name, value) {
     let { amount, years, rate } = this.state;
+    // Расчет ежемесячного платежа
     rate = rate / 1200;
     const paymentValue = Math.round(
       (amount * rate) / (1 - Math.pow(1 + rate, -years))
     );
+    // Расчет суммы займа при изменении платежа
     if (name === "payment") {
       const summa = Math.round(
         (value * (1 - Math.pow(1 + rate, -years))) / rate
       );
-      this.setState({ amount: summa });
+      if (summa > 5000000) {
+        this.setState({ amount: 5000000, payment: 173327 });
+      } else {
+        this.setState({ amount: summa });
+      }
+      if (summa < 300000) {
+        this.setState({ amount: 300000, payment: paymentValue });
+      }
     }
     this.setState({ payment: paymentValue, totalSum: this.state.amount });
   }
