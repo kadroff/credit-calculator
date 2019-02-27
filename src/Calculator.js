@@ -14,7 +14,8 @@ class Calculator extends Component {
       payment: 17333,
       totalSum: 500000,
       totalPercents: 0,
-      amountStep: 50000
+      amountStep: 50000,
+      yearsStep: 12
     };
   }
 
@@ -25,13 +26,23 @@ class Calculator extends Component {
 
     if (name === "amount") {
       let resultStep = 0;
-      if (value < 100000) {
-        resultStep = 10000;
-      } else if (value < 1000000) {
+      if (value < 1000000) {
         resultStep = 50000;
       } else resultStep = 100000;
       this.setState({ amountStep: resultStep });
     }
+    if (name === "years") {
+      let yearsStep = 0;
+      if (value < 12) {
+        yearsStep = 1;
+      } else if (value <= 18) {
+        yearsStep = 6;
+      } else if (value >= 24) {
+        yearsStep = 12;
+      }
+      this.setState({ yearsStep: yearsStep });
+    }
+
     this.calculate(name, value);
   }
 
@@ -56,7 +67,7 @@ class Calculator extends Component {
   }
 
   render() {
-    const { amountStep } = this.state;
+    const { amountStep, yearsStep } = this.state;
     return (
       <form className="calculator">
         <div className="left-slider">
@@ -74,7 +85,7 @@ class Calculator extends Component {
           <InputRange
             step={amountStep}
             maxValue={5000000}
-            minValue={0}
+            minValue={300000}
             value={this.state.amount}
             onChange={value => this.handleRangeChange("amount", value)}
           />
@@ -89,7 +100,7 @@ class Calculator extends Component {
             />
           </div>
           <InputRange
-            step={12}
+            step={yearsStep}
             maxValue={240}
             minValue={1}
             value={this.state.years}
@@ -109,7 +120,7 @@ class Calculator extends Component {
           <InputRange
             step={0.1}
             maxValue={60}
-            minValue={15}
+            minValue={6}
             value={this.state.rate}
             onChange={value => this.handleRangeChange("rate", value)}
             className="input_range"
