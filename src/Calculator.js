@@ -32,7 +32,7 @@ class Calculator extends Component {
       } else resultStep = 100000;
       this.setState({ amountStep: resultStep });
     }
-    this.calculate();
+    this.calculate(name, value);
   }
 
   handleInputChange(e) {
@@ -40,12 +40,18 @@ class Calculator extends Component {
     this.calculate();
   }
 
-  calculate() {
+  calculate(name, value) {
     let { amount, years, rate } = this.state;
     rate = rate / 1200;
     const paymentValue = Math.round(
       (amount * rate) / (1 - Math.pow(1 + rate, -years))
     );
+    if (name === "payment") {
+      const summa = Math.round(
+        (value * (1 - Math.pow(1 + rate, -years))) / rate
+      );
+      this.setState({ amount: summa });
+    }
     this.setState({ payment: paymentValue, totalSum: this.state.amount });
   }
 
