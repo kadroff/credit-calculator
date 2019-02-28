@@ -3,7 +3,7 @@
   font-family: "Nunito", sans-serif;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   text-align: left;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -21,22 +21,22 @@
   color: gray;
 }
 
-.calculator .left-slider {
+/* .calculator .left-slider {
   justify-content: flex-start;
   width: 70%;
   flex: 1 0 0;
   order: 1;
-}
+} */
 
 .calculator .right-slider {
-  justify-content: flex-end;
+  /* justify-content: flex-end;
   width: 50%;
-  flex: 1 0 0;
+  flex: 1 0 0; */
   order: 2;
-  padding-left: 4rem;
+  /* padding-left: 4rem; */
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .calculator .left-slider {
     justify-content: flex-start;
     width: 100%;
@@ -66,7 +66,7 @@
     order: 2;
     padding-top: 1.5rem;
   }
-}
+} */
 
 .calculator .input-range {
   padding: 0.3rem;
