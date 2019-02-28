@@ -12,8 +12,8 @@ class Calculator extends Component {
       years: 36,
       rate: 15,
       payment: 17333,
-      totalSum: 500000,
-      totalPercents: 0,
+      totalSum: 623976,
+      totalPercents: 123976,
       amountStep: 50000,
       yearsStep: 12,
       amountPayment: 623976,
@@ -55,6 +55,8 @@ class Calculator extends Component {
 
   calculate(name, value) {
     let { amount, years, rate } = this.state;
+    let totalPercents = 0;
+    let totalSum = 0;
     // Расчет ежемесячного платежа
     rate = rate / 1200;
     const paymentValue = Math.round(
@@ -74,7 +76,13 @@ class Calculator extends Component {
         this.setState({ amount: 300000, payment: paymentValue });
       }
     }
-    this.setState({ payment: paymentValue, totalSum: this.state.amount });
+    totalSum = paymentValue * years;
+    totalPercents = totalSum - amount;
+    this.setState({
+      payment: paymentValue,
+      totalSum: totalSum,
+      totalPercents: totalPercents
+    });
   }
 
   render() {
@@ -95,6 +103,7 @@ class Calculator extends Component {
           </div>
           <InputRange
             step={amountStep}
+            formatLabel={value => `${value.toLocaleString()} ₽`}
             maxValue={5000000}
             minValue={300000}
             value={this.state.amount}
@@ -112,6 +121,7 @@ class Calculator extends Component {
           </div>
           <InputRange
             step={yearsStep}
+            formatLabel={value => `${value.toLocaleString()}м.`}
             maxValue={240}
             minValue={1}
             value={this.state.years}
@@ -130,6 +140,7 @@ class Calculator extends Component {
           </div>
           <InputRange
             step={0.1}
+            formatLabel={value => `${value.toLocaleString()}%`}
             maxValue={60}
             minValue={6}
             value={this.state.rate}
@@ -151,12 +162,13 @@ class Calculator extends Component {
               type="text"
               className="input-left"
               name="name"
-              value={this.state.payment}
+              value={this.state.payment.toLocaleString()}
               onChange={e => this.handleRangeChange(e)}
             />
           </div>
           <InputRange
             step={1000}
+            formatLabel={value => `${value.toLocaleString()} ₽`}
             maxValue={200000}
             minValue={0}
             value={this.state.payment}
@@ -169,7 +181,7 @@ class Calculator extends Component {
               type="text"
               className="input-left"
               readOnly
-              value={this.state.totalSum.toLocaleString()}
+              value={this.state.totalSum.toLocaleString() + " ₽"}
               name="totalSum"
             />
           </div>
@@ -180,7 +192,7 @@ class Calculator extends Component {
               type="text"
               className="input-left"
               readOnly
-              value={this.state.totalPercents.toLocaleString()}
+              value={this.state.totalPercents.toLocaleString() + " ₽"}
               name="totalPercents"
             />
           </div>

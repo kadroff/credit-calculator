@@ -132,6 +132,10 @@
   font-size: 14px;
 }
 
+.calculator .input-range__label--max .input-range__label-container {
+  left: 20%;
+}
+
 .calculator input[type="button"] {
   margin-top: 1.5rem;
   height: 3rem;
