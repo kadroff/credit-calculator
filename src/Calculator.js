@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InputRange from "react-input-range";
+import Modal from "react-responsive-modal";
 
 import "./Calculator.css";
 import "react-input-range/lib/css/index.css";
@@ -17,7 +18,8 @@ class Calculator extends Component {
       amountStep: 50000,
       yearsStep: 12,
       amountPayment: 623976,
-      overpayment: 123976
+      overpayment: 123976,
+      open: false
     };
   }
 
@@ -85,8 +87,16 @@ class Calculator extends Component {
     });
   }
 
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
   render() {
-    const { amountStep, yearsStep } = this.state;
+    const { amountStep, yearsStep, open } = this.state;
     return (
       <form className="calculator">
         <div className="left-slider">
@@ -140,7 +150,7 @@ class Calculator extends Component {
           </div>
           <InputRange
             step={0.1}
-            formatLabel={value => `${value.toLocaleString()}%`}
+            formatLabel={value => `${value.toLocaleString()}% годовых`}
             maxValue={60}
             minValue={6}
             value={this.state.rate}
@@ -197,8 +207,15 @@ class Calculator extends Component {
             />
           </div>
 
-          <input type="button" value="График платежей" />
+          <input
+            type="button"
+            onClick={this.onOpenModal}
+            value="График платежей"
+          />
           <input type="button" value="Оставить заявку" />
+          <Modal open={open} onClose={this.onCloseModal} center>
+            <h2>Simple centered modal</h2>
+          </Modal>
         </div>
       </form>
     );
