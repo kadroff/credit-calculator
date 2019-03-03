@@ -91,7 +91,11 @@ class Calculator extends Component {
     const { years, payment, amount, rate } = this.state;
     let tableValue = [];
     let mainAmount = amount;
+    let amountStyle = 100;
+    let mainPaymentStyle = 0;
     for (var i = 1; i <= years; i++) {
+      amountStyle = amountStyle - 100 / years;
+      mainPaymentStyle += 100 / years;
       let paymentPercent = (mainAmount * (rate / 100) * 30) / 365;
       let mainPayment = payment - paymentPercent;
       mainAmount = mainAmount - mainPayment;
@@ -100,10 +104,29 @@ class Calculator extends Component {
         <tr>
           <td>{i}</td>
           <td>{Math.round(payment)}</td>
-          <td className="table__percent">{Math.round(paymentPercent)}</td>
-          <td className="table_main__payment">{Math.round(mainPayment)}</td>
-          <td className="table_main__amount">
-            {mainAmount > 0 ? Math.round(mainAmount) : 0}
+          <td>
+            <div
+              className="table__percent"
+              style={{ width: `${amountStyle}%` }}
+            >
+              {Math.round(paymentPercent)}
+            </div>
+          </td>
+          <td>
+            <div
+              className="table_main__payment"
+              style={{ width: `${mainPaymentStyle}%` }}
+            >
+              {Math.round(mainPayment)}
+            </div>
+          </td>
+          <td>
+            <div
+              className="table_main__amount"
+              style={{ width: `${amountStyle}%` }}
+            >
+              {mainAmount > 0 ? Math.round(mainAmount) : 0}
+            </div>
           </td>
         </tr>
       );

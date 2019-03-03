@@ -136,14 +136,17 @@ td {
 
 .table_main__payment {
   background: #90ee90;
+  float: left;
 }
 
 .table_main__amount {
   background: #ffc0cb;
+  float: left;
 }
 
 .table__percent {
   background: #b0ebf3;
+  float: right;
 }
 
 .table__total td {
