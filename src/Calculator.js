@@ -86,7 +86,7 @@ class Calculator extends Component {
       totalPercents: totalPercents
     });
   }
-
+  // Расчет графика платежей
   createTable = () => {
     const { years, payment, amount, rate } = this.state;
     let tableValue = [];
@@ -100,9 +100,11 @@ class Calculator extends Component {
         <tr>
           <td>{i}</td>
           <td>{Math.round(payment)}</td>
-          <td>{Math.round(paymentPercent)}</td>
-          <td>{Math.round(mainPayment)}</td>
-          <td>{mainAmount > 0 ? Math.round(mainAmount) : 0}</td>
+          <td className="table__percent">{Math.round(paymentPercent)}</td>
+          <td className="table_main__payment">{Math.round(mainPayment)}</td>
+          <td className="table_main__amount">
+            {mainAmount > 0 ? Math.round(mainAmount) : 0}
+          </td>
         </tr>
       );
       //
@@ -120,7 +122,14 @@ class Calculator extends Component {
   };
 
   render() {
-    const { amountStep, yearsStep, open } = this.state;
+    const {
+      amountStep,
+      yearsStep,
+      open,
+      totalSum,
+      totalPercents,
+      amount
+    } = this.state;
     return (
       <form className="calculator">
         <div className="left-slider">
@@ -241,7 +250,7 @@ class Calculator extends Component {
             <table>
               <caption>График платежей</caption>
               <tbody>
-                <tr>
+                <tr className="table__header">
                   <th>№</th>
                   <th>Платеж, ₽</th>
                   <th>Платеж по процентам, ₽</th>
@@ -249,6 +258,20 @@ class Calculator extends Component {
                   <th>Остаток основного долга, ₽</th>
                 </tr>
                 {this.createTable()}
+                <tr className="table__total">
+                  <td>
+                    <strong>Итого:</strong>
+                  </td>
+                  <td>
+                    <strong>{totalSum}</strong>
+                  </td>
+                  <td>
+                    <strong>{totalPercents}</strong>
+                  </td>
+                  <td>
+                    <strong>{amount}</strong>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </Modal>

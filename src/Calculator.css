@@ -131,4 +131,33 @@
 
 td {
   text-align: center;
+  border-bottom: 1px dotted #bbb;
+}
+
+.table_main__payment {
+  background: #90ee90;
+}
+
+.table_main__amount {
+  background: #ffc0cb;
+}
+
+.table__percent {
+  background: #b0ebf3;
+}
+
+.table__total td {
+  padding-top: 15px;
+}
+
+th {
+  padding: 10px 5px 10px 15px;
+}
+
+.table__header th {
+  border-bottom: 1px solid black;
+}
+
+caption {
+  font-size: 1.5rem;
 }
