@@ -126,3 +126,9 @@
   border-radius: 5px;
   padding-left: 25px;
 }
+
+/* График платежей */
+
+td {
+  text-align: center;
+}

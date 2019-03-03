@@ -87,6 +87,30 @@ class Calculator extends Component {
     });
   }
 
+  createTable = () => {
+    const { years, payment, amount, rate } = this.state;
+    let tableValue = [];
+    let mainAmount = amount;
+    for (var i = 1; i <= years; i++) {
+      let paymentPercent = (mainAmount * (rate / 100) * 30) / 365;
+      let mainPayment = payment - paymentPercent;
+      mainAmount = mainAmount - mainPayment;
+
+      tableValue.push(
+        <tr>
+          <td>{i}</td>
+          <td>{Math.round(payment)}</td>
+          <td>{Math.round(paymentPercent)}</td>
+          <td>{Math.round(mainPayment)}</td>
+          <td>{mainAmount > 0 ? Math.round(mainAmount) : 0}</td>
+        </tr>
+      );
+      //
+    }
+
+    return tableValue;
+  };
+
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -214,7 +238,19 @@ class Calculator extends Component {
           />
           <input type="button" value="Оставить заявку" />
           <Modal open={open} onClose={this.onCloseModal} center>
-            <h2>Simple centered modal</h2>
+            <table>
+              <caption>График платежей</caption>
+              <tbody>
+                <tr>
+                  <th>№</th>
+                  <th>Платеж, ₽</th>
+                  <th>Платеж по процентам, ₽</th>
+                  <th>Платеж по основному долгу, ₽</th>
+                  <th>Остаток основного долга, ₽</th>
+                </tr>
+                {this.createTable()}
+              </tbody>
+            </table>
           </Modal>
         </div>
       </form>
