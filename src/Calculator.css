@@ -146,7 +146,7 @@ td {
 
 .table__percent {
   background: #b0ebf3;
-  float: right;
+  float: left;
 }
 
 .table__total td {
